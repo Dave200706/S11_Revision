@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PresseMots.Models;
 using PresseMots.Models.Data;
 
 namespace PresseMots.Controllers
@@ -31,21 +33,31 @@ namespace PresseMots.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Object model/*[Bind("Id,Name")] Tag tag*/)
+        public async Task<IActionResult> Create( Tags tag)
         {
             if (ModelState.IsValid)
             {
-                /*?*/
+                _context.Add(tag);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(/*...*/);
+            return View(tag);
         }
 
         // GET: Tags/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-           /*..?*/
+            if (id==null)
+            {
+                return NotFound();
+            }
+            var tags = _context.Tags.FirstOrDefaultAsync(m => m.Id == id);
+            if (tags == null)
+            {
+                return NotFound();
+            }
 
-            return View(/*..*/);
+            return View(tags);
         }
 
         // POST: Tags/Delete/5
@@ -53,8 +65,12 @@ namespace PresseMots.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            /*...*/
-
+            var tags = await _context.Tags.FindAsync(id);
+            if (tags != null)
+            {
+                _context.Tags.Remove(tags);
+            }
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

@@ -1,4 +1,4 @@
-@*@model PresseMots.Models.StoryTag
+@model PresseMots.Models.StoryTags
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,10 +12,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tag)
+            @Html.DisplayNameFor(model => model.Tags)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tag.Name)
+            @Html.DisplayFor(model => model.Tags.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Story)
@@ -31,4 +31,3 @@
           <a asp-action="Index" asp-controller="Stories" asp-route-Id="@Model.StoryId">&laquo; Retour</a>
     </form>
 </div>
-*@

@@ -1,4 +1,4 @@
-@*@model PresseMots.Models.StoryTag
+@model PresseMots.Models.StoryTags
 
 @{
     ViewData["Title"] = "Create";
@@ -14,8 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="StoryId" ></input>
             <div class="form-group">
-                <label asp-for="TagId" class="control-label"></label> <a asp-action="Create" asp-controller="Tags" class="badge badge-secondary">Définir une &eacute;tiquette</a>
-                <select asp-for="TagId" class ="form-control" asp-items="ViewBag.TagId"></select>
+                <label asp-for="TagsId" class="control-label"></label> <a asp-action="Create" asp-controller="Tags" class="badge badge-secondary">Définir une &eacute;tiquette</a>
+                <select asp-for="TagsId" class ="form-control" asp-items="ViewBag.TagId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Ajouter" class="btn btn-primary" />
@@ -31,4 +31,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-*@
