@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,9 @@ namespace PresseMots.Controllers
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-              return View(/*...*/);
+            var tags = await _context.Tags.ToListAsync();
+
+            return View(tags);
         }
 
         // GET: Tags/Create
@@ -29,29 +32,31 @@ namespace PresseMots.Controllers
         }
 
         // POST: Tags/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Tags tag)
+        public async Task<IActionResult> Create(Tags tag)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(tag);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(tag);
         }
 
         // GET: Tags/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id==null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var tags = _context.Tags.FirstOrDefaultAsync(m => m.Id == id);
+
+            var tags = await _context.Tags.FirstOrDefaultAsync(m => m.Id == id);
+
             if (tags == null)
             {
                 return NotFound();
@@ -66,11 +71,14 @@ namespace PresseMots.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tags = await _context.Tags.FindAsync(id);
+
             if (tags != null)
             {
                 _context.Tags.Remove(tags);
             }
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
     }
