@@ -18,6 +18,10 @@
                 }
             </div>
             <div class="card-text" >
+                @foreach(var Storie in Model)
+                {
+                    <partial name="_tags" model="Storie"></>
+                }
                 @Html.DisplayFor(modelItem => item.Content)
             </div>
             <div class="panel-footer">
@@ -35,7 +39,9 @@
                 <hr />
                 <a asp-action="Index" asp-route-storyId="@item.Id" asp-controller="Comments">@item.Comments.Where(x => !x.Hidden).Count() commentaire(s)</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a> |
+                <a asp-controller="StoryTags" asp-action="Create" asp-route-StoryId="@item.Id">Ajouter un tag</a>
+
             </div>
         </div>
     </div>

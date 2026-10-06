@@ -47,7 +47,7 @@ namespace PresseMots.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Create([Bind("Title,Content,OwnerId")] Story story)
+        public  IActionResult Create([Bind("Title,Content,OwnerId")] Models.Story story)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace PresseMots.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Edit(int id, [Bind("Id,Title,Content,Draft,OwnerId,CreationTime,LastEditTime,PublishTime")] Story story)
+        public  IActionResult Edit(int id, [Bind("Id,Title,Content,Draft,OwnerId,CreationTime,LastEditTime,PublishTime")] Models.Story story)
         {
             if (id != story.Id)
             {

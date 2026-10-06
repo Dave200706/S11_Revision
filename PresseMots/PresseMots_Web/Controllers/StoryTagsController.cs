@@ -19,8 +19,8 @@ namespace PresseMots.Controllers
             _context = context;
         }
 
-        /*
-  
+
+
         public async Task<IActionResult> Create(int storyId)
         {
             var story = await _context.Stories.FirstOrDefaultAsync(m => m.Id == storyId);
@@ -32,20 +32,21 @@ namespace PresseMots.Controllers
 
 
             ViewData["TagId"] = new SelectList(_context.Tags, "Id", "Name");
-            return View();-- METTRE le modèle adéquat! Pour la correspondance, utilisez storyId pour la première relation et la liste pour la deuxième. 
+            var storyTag = new StoryTags { StoryId = storyId };
+            return View(storyTag); /*--METTRE le modèle adéquat! Pour la correspondance, utilisez storyId pour la première relation et la liste pour la deuxième. */
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StoryId,TagId")] StoryTag storyTag)
+        public async Task<IActionResult> Create([Bind("Id,StoryId,TagId")] StoryTags storyTag)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(storyTag);
                 await _context.SaveChangesAsync();
-        //On revient vers l'article.
-                return RedirectToAction("Index", "Stories", new { Id = storyTag.StoryId});
+                //On revient vers l'article.
+                return RedirectToAction("Index", "Stories", new { Id = storyTag.StoryId });
             }
 
             var story = await _context.Stories.FirstOrDefaultAsync(m => m.Id == storyTag.StoryId);
@@ -55,13 +56,13 @@ namespace PresseMots.Controllers
             }
             ViewBag.StoryTitle = story.Title;
 
-            ViewData["TagId"] = new SelectList(_context.Tags, "Id", "Name", storyTag.TagId);
+            ViewData["TagId"] = new SelectList(_context.Tags, "Id", "Name", storyTag.TagsId);
             return View(storyTag);
         }
 
-      
 
-      
+
+
 
 
         public async Task<IActionResult> Delete(int? id)
@@ -95,11 +96,11 @@ namespace PresseMots.Controllers
             {
                 _context.StoryTags.Remove(storyTag);
             }
-            
+
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), "Stories", new { Id=storyId});
+            return RedirectToAction(nameof(Index), "Stories", new { Id = storyId });
         }
 
-  */
+
     }
 }
