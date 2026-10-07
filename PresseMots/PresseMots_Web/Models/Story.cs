@@ -24,6 +24,8 @@ namespace PresseMots.Models
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage ="le contenu de l'histoire est obligatoire")]
+        [Range(25,1000,ErrorMessage ="Le {0} doit être d'un minimum de {1} et un maximum de {2}")]
         public string Content { get; set; }
 
         //[NotMapped]
