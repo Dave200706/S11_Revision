@@ -18,10 +18,7 @@
                 }
             </div>
             <div class="card-text" >
-                @foreach(var Storie in Model)
-                {
-                    <partial name="_tags" model="Storie"></>
-                }
+               <partial name="_tags" model="item"/>
                 @Html.DisplayFor(modelItem => item.Content)
             </div>
             <div class="panel-footer">
